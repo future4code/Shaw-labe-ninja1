@@ -1,11 +1,43 @@
 import React from 'react'
+import Home from './pages/Home/Home'
+import Cart from './pages/Cart/Cart'
 import CreateServicePage from './pages/CreateServicePage/CreateServicePage'
 
 class App extends React.Component {
-	render() {
-		return (
+
+	state = {
+		currentScreen: "Home" 
+	}
+
+	onClickHomePage = () => {
+		this.setState({ currentScreen: "Home" })
+	}
+
+	onClickCartPage = () => {
+		this.setState({ currentScreen: "Cart" })
+	}
+
+	selectPage = () => {
+		switch(this.state.currentScreen){
+			case "Home":
+				return <Home />
+			case "Cart":
+				return <Cart />
+			default:
+				return <Home />
+		}
+	}
+
+	render(){
+		return(
 			<div>
-			<CreateServicePage/>
+				<header>
+					<h1>LabeNinjas</h1>
+					<button onClick={this.onClickHomePage}>Home</button>
+					<button onClick={this.onClickCartPage}>Carrinho</button>
+				</header>
+
+				{this.selectPage()}
 			</div>
 		)
 	}

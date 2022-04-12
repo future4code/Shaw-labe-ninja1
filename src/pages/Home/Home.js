@@ -1,11 +1,11 @@
 import React from 'react'
 import axios from 'axios'
-import CreateServicePage from './CreateServicePage/CreateServicePage'
-import ServicePage from './ServicePage/ServicePage'
+import CreateServicePage from '../CreateServicePage/CreateServicePage'
+import ServicePage from '../ServicePage/ServicePage'
 import { BASE_URL } from '../../constants/urls'
 import { HEADERS } from '../../constants/headers'
 
-export class Home extends React.Component {
+export default class Home extends React.Component {
     state = {
         screen: "Home",
         cart: [],
@@ -45,7 +45,7 @@ export class Home extends React.Component {
                 <h1>LabeNinjas</h1>
                 <button onClick={this.goToCreateServicePage}>Cadastrar um serviço</button>
                 <button onClick={this.goToServicePage}>Contratar um serviço</button>
-                {this.selectScreen}
+                {this.selectScreen()}
             </div>
         )
     }

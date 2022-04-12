@@ -74,7 +74,7 @@ export default class CreateServicePage extends React.Component {
     render() {
 
         const PaymentMethodsUnique = new Map();
-        
+
         this.state.inputPaymentMethod.forEach((method) => {
             if (!PaymentMethodsUnique.has(method)) {
                 PaymentMethodsUnique.set(method)
@@ -112,7 +112,7 @@ export default class CreateServicePage extends React.Component {
                     <option value={"Pix"}>Pix</option>
                 </select>
 
-                {paymentFinal}
+                {PaymentMethodsUnique}
 
                 <input
                     onChange={this.onChangeDueDate}

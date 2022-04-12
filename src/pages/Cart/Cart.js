@@ -4,7 +4,7 @@ export default class Cart extends React.Component {
     render(){
         return(
             <>
-                aoba
+                Hello World
             </>
         )
     }

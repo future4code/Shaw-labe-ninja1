@@ -1,6 +1,7 @@
 import React from 'react'
 import Home from './pages/Home/Home'
 import Cart from './pages/Cart/Cart'
+import CreateServicePage from './pages/CreateServicePage/CreateServicePage'
 
 class App extends React.Component {
 

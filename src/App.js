@@ -24,7 +24,7 @@ class App extends React.Component {
 				return <Cart />
 			default:
 				return <Home />
-		}
+		}	
 	}
 
 	render(){

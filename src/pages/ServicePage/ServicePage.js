@@ -11,6 +11,7 @@ export default class ServicePage extends React.Component {
 
     state = {
         serviceList: [],
+        sort: "title",
     }
 
     componentDidMount() {
@@ -28,9 +29,36 @@ export default class ServicePage extends React.Component {
             })
     }
 
-    render() {
+    getFilteredAndSortedList = () => {
+        return this.state.serviceList
+            .filter(service => service.price <= this.props.maxValue)
+            .filter(service => service.price >= this.props.minValue)
+            .filter(service => (service.title.toLowerCase() || service.description.toLowerCase()).includes(this.props.query.toLowerCase()))
+            .sort((a, b) => {
+                switch (this.state.sort) {
+                    case "title":
+                        return a.title.localeCompare(b.title)
+                    case "dueDate":
+                        return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime()
+                    case "minValue":
+                        return a.price - b.price
+                        case "maxValue":
+                            return b.price - a.price
+                }
+            })
+    }
 
-        const services = this.state.serviceList.map((service) => {
+
+    onChangeSort = (e) => {
+        this.setState({ sort: e.target.value })
+    }
+
+    render() {
+        const getFilteredAndSortedList = this.getFilteredAndSortedList()
+
+
+        const services = getFilteredAndSortedList.map((service) => {
+        //const services = this.state.serviceList.map((service) => {
 
             return (
                 <div key={service.id}>
@@ -44,6 +72,40 @@ export default class ServicePage extends React.Component {
         })
 
         return (
+
+            <div>
+                <input
+                    placeholder="Valor mínimo"
+                    type={"number"}
+                    value={this.props.minValue}
+                    onChange={this.props.onChangeMinValue}
+                />
+                <input
+                    placeholder="Valor máximo"
+                    type={"number"}
+                    value={this.props.maxValue}
+                    onChange={this.props.onChangeMaxValue}
+                />
+                <input
+                    placeholder="Título ou descrição"
+                    value={this.props.query}
+                    onChange={this.props.onChangeQuery}
+                />
+                <span>
+                    <label for="sort">
+                        <select name="sort"
+                            value={this.state.sort}
+                            onChange={this.onChangeSort}
+                        >
+                            <option>Sem ordenação</option>
+                            <option value="minValue">Menor Valor</option>
+                            <option value="maxValue">Maior Valor</option>
+                            <option value="title">Título</option>
+                            <option value="dueDate">Prazo</option>
+                        </select>
+                    </label>
+                </span>
+
             <div align={"center"}>
                 <br />
                 {this.state.serviceList.length ? services : "carregando..."}

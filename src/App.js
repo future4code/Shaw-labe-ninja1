@@ -22,7 +22,10 @@ class App extends React.Component {
 
 	state = {
 		screen: "Home",
-		serviceId: ""
+		serviceId: "",
+		minValue: 0,
+		maxValue: 100,
+		query: "",
 	}
 
 	detailsPage = (serviceId) => {
@@ -48,6 +51,18 @@ class App extends React.Component {
 		this.setState({ screen: "ServicePage" })
 	}
 
+	onChangeMinValue = (e) => {
+		this.setState({ minValue: e.target.value })
+	}
+
+	onChangeMaxValue = (e) => {
+		this.setState({ maxValue: e.target.value })
+	}
+
+	onChangeQuery = (e) => {
+		this.setState({ query: e.target.value })
+	}
+
 	selectPage = () => {
 		switch (this.state.screen) {
 			case "Home":
@@ -67,6 +82,12 @@ class App extends React.Component {
 			default:
 				return <ServicePage
 					detailsPage={this.detailsPage}
+					minValue={this.state.minValue}
+					maxValue={this.state.maxValue}
+					query={this.state.query}
+					onChangeMinValue={this.onChangeMinValue}
+					onChangeMaxValue={this.onChangeMaxValue}
+					onChangeQuery={this.onChangeQuery}
 				/>
 		}
 	}

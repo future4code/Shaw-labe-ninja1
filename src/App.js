@@ -26,13 +26,44 @@ class App extends React.Component {
 		minValue: 0,
 		maxValue: 100,
 		query: "",
+		cart: []
 	}
+
+	purchaseEnd = () => {
+		this.setState({ cart: [] })
+		alert("Obrigado pela sua compra!")
+	}
+
+
+	componentDidUpdate() {
+		localStorage.setItem(this.state.serviceId, JSON.stringify(this.state.cart))
+	};
+
+	componentDidMount() {
+		const services = localStorage.getItem(this.state.serviceId)
+		if (services) {
+			const newServices = JSON.parse(services)
+			this.setState({ cart: newServices })
+		}
+	};
+
 
 	detailsPage = (serviceId) => {
 		this.setState({
 			serviceId: serviceId,
 			screen: "DetailsPage"
 		})
+	}
+
+	addServiceInCart = (service) => {
+		const newService = [...this.state.cart, service]
+		this.setState({ cart: newService })
+	}
+
+	deleteServiceFromCart = (serviceId) => {
+		let array = this.state.cart
+		array.splice(serviceId, 1)
+		this.setState({ cart: array })
 	}
 
 	onClickHomePage = () => {
@@ -71,7 +102,13 @@ class App extends React.Component {
 					goToServicePage={this.goToServicePage}
 				/>
 			case "Cart":
-				return <Cart />
+				return <Cart
+					purchaseEnd={this.purchaseEnd}
+					goToServicePage={this.goToServicePage}
+					deleteServiceFromCart={this.deleteServiceFromCart}
+					serviceId={this.state.serviceId}
+					cart={this.state.cart}
+				/>
 			case "CreateServicePage":
 				return <CreateServicePage />
 			case "DetailsPage":
@@ -81,6 +118,7 @@ class App extends React.Component {
 				/>
 			default:
 				return <ServicePage
+					addServiceInCart={this.addServiceInCart}
 					detailsPage={this.detailsPage}
 					minValue={this.state.minValue}
 					maxValue={this.state.maxValue}
@@ -93,7 +131,7 @@ class App extends React.Component {
 	}
 
 	render() {
-		console.log(this.state.serviceId);
+		// console.log(this.state.cart);
 		// comprovação do id certo sendo chamado
 		return (
 			<div>

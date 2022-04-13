@@ -2,7 +2,9 @@ import React from 'react'
 import axios from 'axios'
 import { BASE_URL } from '../../constants/urls'
 import { HEADERS } from '../../constants/headers'
-import { Card } from '@material-ui/core'
+// import { Card } from '@material-ui/core'
+
+
 
 
 export default class ServicePage extends React.Component {
@@ -12,7 +14,7 @@ export default class ServicePage extends React.Component {
         sort: "title",
     }
 
-    componentDidMount = () => {
+    componentDidMount() {
         this.getAllServices()
     }
 
@@ -54,19 +56,23 @@ export default class ServicePage extends React.Component {
     render() {
         const getFilteredAndSortedList = this.getFilteredAndSortedList()
 
+
         const services = getFilteredAndSortedList.map((service) => {
+        //const services = this.state.serviceList.map((service) => {
+
             return (
                 <div key={service.id}>
                     <h2>{service.title}</h2>
                     <h4>{service.price}</h4>
                     <h5>{service.dueDate}</h5>
                     <button onClick={() => this.props.detailsPage(service.id)}>Ver detalhes</button>
-                    <button>Adicionar no carrinho</button>
+                    <button onClick={() => this.props.addServiceInCart(service)}>Adicionar no carrinho</button>
                 </div>
             )
         })
 
         return (
+
             <div>
                 <input
                     placeholder="Valor mínimo"
@@ -100,9 +106,9 @@ export default class ServicePage extends React.Component {
                     </label>
                 </span>
 
-                <div align={"center"}>
-                    {services}
-                </div>
+            <div align={"center"}>
+                <br />
+                {this.state.serviceList.length ? services : "carregando..."}
             </div>
         )
     }

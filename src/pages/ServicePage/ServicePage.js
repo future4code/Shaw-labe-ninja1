@@ -13,7 +13,7 @@ export default class ServicePage extends React.Component {
         serviceList: [],
     }
 
-    componentDidMount () {
+    componentDidMount() {
         this.getAllServices()
     }
 
@@ -31,13 +31,14 @@ export default class ServicePage extends React.Component {
     render() {
 
         const services = this.state.serviceList.map((service) => {
+
             return (
                 <div key={service.id}>
                     <h2>{service.title}</h2>
                     <h4>{service.price}</h4>
                     <h5>{service.dueDate}</h5>
                     <button onClick={() => this.props.detailsPage(service.id)}>Ver detalhes</button>
-                    <button>Adicionar no carrinho</button>
+                    <button onClick={() => this.props.addServiceInCart(service)}>Adicionar no carrinho</button>
                 </div>
             )
         })
@@ -45,13 +46,7 @@ export default class ServicePage extends React.Component {
         return (
             <div align={"center"}>
                 <br />
-                <br />
-                <br />
-                {services}
-                Service Page
-                🪧
-                🪧
-                🪧
+                {this.state.serviceList.length ? services : "carregando..."}
             </div>
         )
     }

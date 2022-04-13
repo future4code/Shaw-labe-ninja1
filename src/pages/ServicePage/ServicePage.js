@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { BASE_URL } from '../../constants/urls'
 import { HEADERS } from '../../constants/headers'
-import { Card } from '@material-ui/core'
+// import { Card } from '@material-ui/core'
 
 
 export default class ServicePage extends React.Component {
@@ -11,7 +11,7 @@ export default class ServicePage extends React.Component {
         serviceList: [],
     }
 
-    componentDidMount = () => {
+    componentDidMount () {
         this.getAllServices()
     }
 

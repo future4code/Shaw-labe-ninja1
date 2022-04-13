@@ -5,11 +5,11 @@ import { HEADERS } from '../../constants/headers'
 import { BASE_URL } from '../../constants/urls'
 
 const DivCreateService = styled.div`
-display: flex; 
-flex-direction: column;
-align-items:center;
-text-align: center; 
-justify-content: center;
+    display: flex; 
+    flex-direction: column;
+    align-items:center;
+    text-align: center; 
+    justify-content: center;
 `
 
 
@@ -31,21 +31,21 @@ export default class CreateServicePage extends React.Component {
             paymentMethods: this.state.inputPaymentMethod,
             dueDate: this.state.inputDueDate
         }
-        axios
-            .post(`${BASE_URL}/jobs`, body, HEADERS)
-            .then((res) => {
-                console.log(res.data)
-                this.setState({
-                    inputTitle: "",
-                    inputDescription: "",
-                    inputPrice: "",
-                    inputPaymentMethod: [],
-                    inputDueDate: ""
-                })
+
+        axios.post(`${BASE_URL}/jobs`, body, HEADERS)
+        .then((res) => {
+            console.log(res.data)
+            this.setState({
+                inputTitle: "",
+                inputDescription: "",
+                inputPrice: "",
+                inputPaymentMethod: [],
+                inputDueDate: ""
             })
-            .catch((err) => {
-                alert("Dados inválidos")
-            })
+        })
+        .catch((err) => {
+            alert("Dados inválidos")
+        })
     }
 
     onChangePaymentMethod = (e) => {
@@ -79,15 +79,18 @@ export default class CreateServicePage extends React.Component {
             if (!PaymentMethodsUnique.has(method)) {
                 PaymentMethodsUnique.set(method)
             }
-            return (<div>
-                {method}
-            </div>
+            return (
+                <div>
+                    {method}
+                </div>
             )
         })
+
         return (
 
             <DivCreateService>
                 <h1>Cadastre o seu serviço</h1>
+
                 <input
                     onChange={this.onChangeTitle}
                     value={this.state.inputTitle}
@@ -119,8 +122,8 @@ export default class CreateServicePage extends React.Component {
                     value={this.state.inputDueDate}
                     type={'date'}
                 />
-                <button
-                    onClick={this.createService}>
+
+                <button onClick={this.createService}>
                     Cadastrar
                 </button>
             </DivCreateService>

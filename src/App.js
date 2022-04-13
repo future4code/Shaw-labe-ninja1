@@ -1,8 +1,21 @@
 import React from 'react'
+import styled, { createGlobalStyle } from 'styled-components'
 import Home from './pages/Home/Home'
 import Cart from './pages/Cart/Cart'
 import CreateServicePage from './pages/CreateServicePage/CreateServicePage'
 import ServicePage from './pages/ServicePage/ServicePage'
+
+const GlobalStyled = createGlobalStyle`
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+`
+
+const HeaderDiv = styled.div`
+	border: 5px solid black;
+`
 
 class App extends React.Component {
 
@@ -42,11 +55,12 @@ class App extends React.Component {
 	render(){
 		return(
 			<div>
-				<header>
+				<GlobalStyled />
+				<HeaderDiv>
 					<h1>LabeNinjas</h1>
 					<button onClick={this.onClickHomePage}>Home</button>
 					<button onClick={this.onClickCartPage}>Carrinho</button>
-				</header>	
+				</HeaderDiv>	
 				{this.selectPage()}
 			</div>
 		)

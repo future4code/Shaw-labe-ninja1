@@ -35,7 +35,6 @@ export default class ServiceDetails extends React.Component {
         {this.state.jobDetails.title && <h1>{this.state.jobDetails.title}</h1>}
         <br />
         <br />
-        <br />
         <div>
           {this.state.jobDetails.price && (
             <h3>Preço:R$ {this.state.jobDetails.price}</h3>

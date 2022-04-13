@@ -33,19 +33,19 @@ export default class CreateServicePage extends React.Component {
         }
 
         axios.post(`${BASE_URL}/jobs`, body, HEADERS)
-        .then((res) => {
-            console.log(res.data)
-            this.setState({
-                inputTitle: "",
-                inputDescription: "",
-                inputPrice: "",
-                inputPaymentMethod: [],
-                inputDueDate: ""
+            .then((res) => {
+                alert("Serviço cadastrado com sucesso!")
+                this.setState({
+                    inputTitle: "",
+                    inputDescription: "",
+                    inputPrice: "",
+                    inputPaymentMethod: [],
+                    inputDueDate: ""
+                })
             })
-        })
-        .catch((err) => {
-            alert("Dados inválidos")
-        })
+            .catch((err) => {
+                alert("Dados inválidos")
+            })
     }
 
     onChangePaymentMethod = (e) => {
@@ -81,7 +81,7 @@ export default class CreateServicePage extends React.Component {
             }
             return (
                 <div>
-                    {method}
+                    <p>{method}</p>
                 </div>
             )
         })
@@ -108,11 +108,11 @@ export default class CreateServicePage extends React.Component {
                     type={'number'}
                 />
                 <select onChange={this.onChangePaymentMethod}>
-                    <option value={"Cartão de débito"}>Cartão de débito</option>
-                    <option value={"Cartão de crédito"}>Cartão de crédito</option>
-                    <option value={"Paypal"}>Paypal</option>
-                    <option value={"Boleto"}>Boleto</option>
-                    <option value={"Pix"}>Pix</option>
+                    <option value={" Cartão de débito "}>Cartão de débito</option>
+                    <option value={" Cartão de crédito "}>Cartão de crédito</option>
+                    <option value={" Paypal "}>Paypal</option>
+                    <option value={" Boleto "}>Boleto</option>
+                    <option value={" Pix "}>Pix</option>
                 </select>
 
                 {PaymentMethodsUnique}

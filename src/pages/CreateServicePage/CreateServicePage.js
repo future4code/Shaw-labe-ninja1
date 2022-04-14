@@ -3,24 +3,34 @@ import axios from 'axios'
 import styled from 'styled-components'
 import { HEADERS } from '../../constants/headers'
 import { BASE_URL } from '../../constants/urls'
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 const DivCreateService = styled.div`
     display: flex; 
     flex-direction: column;
     align-items:center;
-    margin: 10vh;
+    margin: 5vh;
 
     h1 {
         text-decoration: underline;
+        text-align: center;
         margin-bottom: 5vh;
+        color: #494949;
     }
 
-    input, select, button {
-        padding: 0.5vh 0.5vw;
-        margin: 1vh;
-        width: 200px;
-    } 
+    Button {
+        margin: 5px;
+    }
 `
+
+const ButtonMethod = styled.button`
+    background: none;
+    border: none;
+    &:hover{
+        cursor: pointer;
+    }
+`  
 
 export default class CreateServicePage extends React.Component {
 
@@ -87,7 +97,7 @@ export default class CreateServicePage extends React.Component {
 
         const PaymentMethodsUnique = this.state.inputPaymentMethod.map((method) => {
             return (
-                <li> {method} <button onClick={() => this.onClickDeleteMethod(method)}>x</button></li>
+                <p> {method} <ButtonMethod onClick={() => this.onClickDeleteMethod(method)}>🗑️</ButtonMethod> </p>
             )
         })
 
@@ -96,41 +106,73 @@ export default class CreateServicePage extends React.Component {
             <DivCreateService>
                 <h1>Cadastre o seu serviço</h1>
 
-                <input
+                <TextField  
+                    id={"outlined-basic"} 
+                    label={"Título"} 
+                    variant={"outlined"} 
                     onChange={this.onChangeTitle}
                     value={this.state.inputTitle}
-                    placeholder='Título'
+                    style={{  margin: 10, width: 300 }}
                 />
-                <input
+                <TextField 
+                    id={"outlined-multiline-static"}
+                    label={"Descrição"}
+                    multiline
+                    rows={2}
+                    variant={"outlined"}
                     onChange={this.onChangeDescription}
                     value={this.state.inputDescription}
-                    placeholder='Descrição'
+                    style={{ margin: 10, width: 300 }}
                 />
-                <input
+                <TextField
+                    id={"outlined-number"}
+                    label={"R$"}
+                    type={"number"}
+                    variant={"outlined"}
                     onChange={this.onChangePrice}
                     value={this.state.inputPrice}
-                    placeholder='R$'
-                    type={'number'}
+                    style={{  margin: 10, width: 300 }}
                 />
-                <select onChange={this.onChangePaymentMethod}>
+                <TextField
+                    id="outlined-select-currency-native"
+                    select
+                    SelectProps={{
+                        native: true,
+                    }}
+                    label="Formas de Pagamento"
+                    variant="outlined" 
+                    onChange={this.onChangePaymentMethod}
+                    style={{ margin: 10, width: 300 }}
+                >
                     <option value={" Cartão de débito "}>Cartão de débito</option>
                     <option value={" Cartão de crédito "}>Cartão de crédito</option>
                     <option value={" Paypal "}>Paypal</option>
                     <option value={" Boleto "}>Boleto</option>
                     <option value={" Pix "}>Pix</option>
-                </select>
-
+                </TextField>
+                
                 {PaymentMethodsUnique}
 
-                <input
+                <TextField
+                    id={"date"}
+                    label={"Data de vencimento"}
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
                     onChange={this.onChangeDueDate}
                     value={this.state.inputDueDate}
-                    type={'date'}
+                    type={"date"}
+                    variant="outlined" 
+                    style={{ margin: 10, width: 300 }}
                 />
 
-                <button onClick={this.createService}>
+                <Button 
+                    onClick={this.createService}
+                    variant="contained"
+        			color="primary"
+                >
                     Cadastrar
-                </button>
+                </Button>
             </DivCreateService>
         )
     }

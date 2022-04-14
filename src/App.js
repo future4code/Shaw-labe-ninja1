@@ -33,8 +33,8 @@ class App extends React.Component {
 	state = {
 		screen: "Home",
 		serviceId: "",
-		minValue: 0,
-		maxValue: 100,
+		minValue: -Infinity,
+		maxValue: Infinity,
 		query: "",
 		cart: []
 	}
@@ -55,7 +55,7 @@ class App extends React.Component {
 	};
 
 	// Outras funções
-	
+
 	detailsPage = (serviceId) => {
 		this.setState({
 			serviceId: serviceId,
@@ -86,7 +86,7 @@ class App extends React.Component {
 	}
 
 	onChangeMaxValue = (e) => {
-		this.setState({ maxValue: e.target.value })
+		this.setState({ maxValue: e.target.value > null ? e.target.value : Infinity })
 	}
 
 	onChangeQuery = (e) => {

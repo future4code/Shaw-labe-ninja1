@@ -74,13 +74,15 @@ export default class ServicePage extends React.Component {
         const getFilteredAndSortedList = this.getFilteredAndSortedList()
 
         const services = getFilteredAndSortedList.map((service) => {
-            //const services = this.state.serviceList.map((service) => {
+
+        const date = new Date();
+        const dateString = date.getDate()  + "/" + (date.getMonth()+1) + "/" + date.getFullYear()
 
             return (
                 <ServiceDiv key={service.id}>
                     <h2>{service.title}</h2>
                     <h3>R$ {service.price}</h3>
-                    <h4>{service.dueDate}</h4>
+                    <h4>{dateString}</h4>
                     <button onClick={() => this.props.detailsPage(service.id)}>Ver detalhes</button>
                     <button onClick={() => this.props.addServiceInCart(service)}>Adicionar no carrinho</button>
                 </ServiceDiv>

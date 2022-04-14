@@ -5,6 +5,13 @@ import Cart from './pages/Cart/Cart'
 import CreateServicePage from './pages/CreateServicePage/CreateServicePage'
 import ServicePage from './pages/ServicePage/ServicePage'
 import ServiceDetails from './pages/ServicePage/ServiceDetails'
+import logo1 from './img/logo1.png'
+import logo3 from './img/logo3.png'
+import { ThemeProvider } from '@material-ui/styles';
+import { theme } from "../src/constants/theme"
+import Button from '@material-ui/core/Button';
+import HomeIcon from '@material-ui/icons/Home';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const GlobalStyled = createGlobalStyle`
 	* {
@@ -12,19 +19,29 @@ const GlobalStyled = createGlobalStyle`
 		padding: 0;
 		box-sizing: border-box;
 	}
+
+	body {
+		background-color: #fdedfd;
+		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	}
 `
 
 const HeaderDiv = styled.div`
 	display: flex;
 	justify-content: space-between;
-	align-items: center;	
-	border: 1px solid black;
-	background-color: grey;
+	align-items: center;
+	background-color: #bfb5e3;
 	padding: 10px;
 
-	button {
-		padding: 3px 20px;
-		border-radius: 10%;
+	Button {
+		margin: 10px;
+		padding: 3px 10px;
+		margin-top: 55px;
+	}
+
+	img {
+		margin-left: 10px;
+		height: 100px
 	}
 `
 
@@ -38,7 +55,6 @@ class App extends React.Component {
 		query: "",
 		cart: []
 	}
-
 
 	// Métodos de Ciclo de Vida
 
@@ -149,17 +165,34 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<ThemeProvider theme={theme}>
 				<GlobalStyled />
 				<HeaderDiv>
-					<h1>LabeNinjas</h1>
 					<div>
-						<button onClick={this.onClickHomePage}>🏠</button>
-						<button onClick={this.onClickCartPage}>🛒</button>
+						<img src={logo1} />
+						<img src={logo3} />
+					</div>
+					<div>
+						<Button 
+							onClick={this.onClickHomePage}
+							variant="contained"
+        					color="primary"
+        					startIcon={<HomeIcon />}
+						> 
+						Home
+						</Button>
+						<Button 
+							onClick={this.onClickCartPage}
+							variant="contained"
+        					color="primary"
+        					startIcon={<ShoppingCartIcon />}
+						> 
+						carrinho
+						</Button>
 					</div>
 				</HeaderDiv>
 				{this.selectPage()}
-			</div>
+			</ThemeProvider>
 		)
 	}
 }

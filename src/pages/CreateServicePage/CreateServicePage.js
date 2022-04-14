@@ -22,7 +22,6 @@ const DivCreateService = styled.div`
     } 
 `
 
-
 export default class CreateServicePage extends React.Component {
 
     state = {
@@ -80,12 +79,11 @@ export default class CreateServicePage extends React.Component {
     }
 
     onClickDeleteMethod = (method) => {
-        // let array = this.state.cart.filter((service) => service.id !== serviceId);
-		// this.setState({ cart: array })
+        let array = this.state.inputPaymentMethod.filter((service) => service !== method);
+		this.setState({ inputPaymentMethod: array })
     }
 
     render() {
-
 
         const PaymentMethodsUnique = this.state.inputPaymentMethod.map((method) => {
             return (
@@ -93,7 +91,6 @@ export default class CreateServicePage extends React.Component {
             )
         })
 
-        console.log(this.state.inputPaymentMethod)
         return (
 
             <DivCreateService>

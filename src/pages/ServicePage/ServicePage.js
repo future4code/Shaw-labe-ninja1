@@ -140,30 +140,27 @@ export default class ServicePage extends React.Component {
                 <FiltersDiv>
                     <TextField
                         id={"outlined-basic"}
-                        label={"Título"}
+                        label={"Valor mínimo"}
                         variant={"outlined"}
                         style={{ width: 200 }}
-                        placeholder="Valor mínimo"
                         type={"number"}
                         value={this.props.minValue}
                         onChange={this.props.onChangeMinValue}
                     />
                     <TextField
                         id={"outlined-basic"}
-                        label={"Título"}
+                        label={"Valor máximo"}
                         variant={"outlined"}
                         style={{ width: 175 }}
-                        placeholder="Valor máximo"
                         type={"number"}
                         value={this.props.maxValue}
                         onChange={this.props.onChangeMaxValue}
                     />
                     <TextField
                         id={"outlined-basic"}
-                        label={"Título"}
+                        label={"Título ou descrição"}
                         variant={"outlined"}
                         style={{ width: 200 }}
-                        placeholder="Título ou descrição"
                         value={this.props.query}
                         onChange={this.props.onChangeQuery}
                     />

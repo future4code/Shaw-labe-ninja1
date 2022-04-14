@@ -40,7 +40,7 @@ const HeaderDiv = styled.div`
 	}
 
 	img {
-		margin-left: 10px;
+		margin-left: 40px;
 		height: 100px
 	}
 `
@@ -169,8 +169,8 @@ class App extends React.Component {
 				<GlobalStyled />
 				<HeaderDiv>
 					<div>
-						<img src={logo1} />
-						<img src={logo3} />
+						<img src={logo1} alt="logo de um ninja apenas os traços"/>
+						<img src={logo3} alt="escrita do nome da loja LabeNinjas"/>
 					</div>
 					<div>
 						<Button 

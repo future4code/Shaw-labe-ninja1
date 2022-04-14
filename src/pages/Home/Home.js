@@ -3,26 +3,35 @@ import styled from 'styled-components'
 import axios from 'axios'
 import { BASE_URL } from '../../constants/urls'
 import { HEADERS } from '../../constants/headers'
+import { ThemeProvider } from '@material-ui/styles';
+import { theme } from "../../constants/theme"
+import Button from '@material-ui/core/Button';
+import imghome from "../../img/home1.png";
 
 const HomeDiv = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    margin: 10vh;
 
-    h1 {
-        padding: 5vh;
-        text-decoration: underline;
+    h2 {
+        padding-top: 5vh;
+        color: #494949;
+        font-size: 2.1rem;
+        font-family: 'Permanent Marker', cursive;
     }
 
-    p {
-        padding: 2vh 0 0 0;
+    img{
+        width: 35%;
+        padding-top: 2vh;
     }
 
-    button {
+    Button {
         padding: 1vh 1vw;
         margin: 1vw;
+        width: 30vw;
+        height: 8vh;
+        font-size: 1.36rem;
     }
 `
 
@@ -41,14 +50,16 @@ export default class Home extends React.Component {
 
     render() {
         return (
-            <HomeDiv>
-                <h1>LabeNinjas</h1>
-                <p> Escolha o seu caminho Ninja </p>
-                <div>
-                    <button onClick={this.props.goToCreateServicePage}>Cadastrar um serviço</button>
-                    <button onClick={this.props.goToServicePage}>Contratar um serviço</button>
-                </div>
-            </HomeDiv>
+            <ThemeProvider theme={theme}>
+                <HomeDiv>    
+                    <h2> O talento certo, no momento certo! </h2>
+                    <img src={imghome} alt="desenho de um jovem fazendo o 2 com a mão, mexendo no computador feliz"/>
+                    <div>
+                        <Button  variant="contained" color="primary" onClick={this.props.goToCreateServicePage}>Quero ser um ninja</Button>
+                        <Button  variant="contained" color="primary" onClick={this.props.goToServicePage}>Quero contratar um ninja</Button>
+                    </div>
+                </HomeDiv>
+            </ThemeProvider>
         )
     }
 }

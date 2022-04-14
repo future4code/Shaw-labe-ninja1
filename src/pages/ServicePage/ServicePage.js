@@ -75,7 +75,7 @@ export default class ServicePage extends React.Component {
 
         const services = getFilteredAndSortedList.map((service) => {
 
-        const date = new Date();
+        const date = new Date(service.dueDate);
         const dateString = date.getDate()  + "/" + (date.getMonth()+1) + "/" + date.getFullYear()
 
             return (

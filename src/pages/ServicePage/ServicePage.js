@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import axios from 'axios'
 import { BASE_URL } from '../../constants/urls'
 import { HEADERS } from '../../constants/headers'
+import { RemoveShoppingCartSharp } from '@material-ui/icons'
 
 const ServiceDiv = styled.div`
     display: grid;
@@ -35,12 +36,12 @@ export default class ServicePage extends React.Component {
 
     getAllServices = () => {
         axios.get(`${BASE_URL}/jobs`, HEADERS)
-        .then((res) => {
-            this.setState({ serviceList: res.data.jobs })
-        })
-        .catch((err) => {
-            console.log(err.response)
-        })
+            .then((res) => {
+                this.setState({ serviceList: res.data.jobs })
+            })
+            .catch((err) => {
+                console.log(err.response)
+            })
     }
 
     getFilteredAndSortedList = () => {
@@ -58,6 +59,9 @@ export default class ServicePage extends React.Component {
                         return a.price - b.price
                     case "maxValue":
                         return b.price - a.price
+                    default:
+                        return this.state.sort
+                        
                 }
             })
     }
@@ -70,7 +74,7 @@ export default class ServicePage extends React.Component {
         const getFilteredAndSortedList = this.getFilteredAndSortedList()
 
         const services = getFilteredAndSortedList.map((service) => {
-        //const services = this.state.serviceList.map((service) => {
+            //const services = this.state.serviceList.map((service) => {
 
             return (
                 <ServiceDiv key={service.id}>

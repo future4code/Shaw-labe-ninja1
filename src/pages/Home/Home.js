@@ -28,16 +28,15 @@ const HomeDiv = styled.div`
 
 export default class Home extends React.Component {
     state = {
-        cart: [], // O que esse cart faz aqui?
         idServiceClick: ""
     }
 
     getJobById = (id) => {
         const url = `${BASE_URL}/jobs/${id}`
 
-        axios.get(url,{ HEADERS })
-        .then((res) => console.log(res.data))
-        .catch((err) => console.log(err.response))
+        axios.get(url, { HEADERS })
+            .then((res) => console.log(res.data))
+            .catch((err) => console.log(err.response))
     }
 
     render() {

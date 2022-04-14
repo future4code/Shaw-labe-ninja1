@@ -43,19 +43,19 @@ export default class CreateServicePage extends React.Component {
         }
 
         axios.post(`${BASE_URL}/jobs`, body, HEADERS)
-        .then((res) => {
-            alert("Serviço cadastrado com sucesso!")
-            this.setState({
-                inputTitle: "",
-                inputDescription: "",
-                inputPrice: "",
-                inputPaymentMethod: [],
-                inputDueDate: ""
+            .then((res) => {
+                alert("Serviço cadastrado com sucesso!")
+                this.setState({
+                    inputTitle: "",
+                    inputDescription: "",
+                    inputPrice: "",
+                    inputPaymentMethod: [],
+                    inputDueDate: ""
+                })
             })
-        })
-        .catch((err) => {
-            alert("Não foi possível registrar o serviço.")
-        })
+            .catch((err) => {
+                alert("Não foi possível registrar o serviço.")
+            })
     }
 
     onChangeTitle = (e) => {
@@ -72,28 +72,28 @@ export default class CreateServicePage extends React.Component {
 
     onChangePaymentMethod = (e) => {
         const addPaymentMethod = [...this.state.inputPaymentMethod, e.target.value]
-        this.setState({ inputPaymentMethod: addPaymentMethod })
+        this.setState({ inputPaymentMethod: this.state.inputPaymentMethod.includes(e.target.value) ? this.state.inputPaymentMethod : addPaymentMethod })
     }
 
     onChangeDueDate = (e) => {
         this.setState({ inputDueDate: e.target.value })
     }
 
+    onClickDeleteMethod = (method) => {
+        // let array = this.state.cart.filter((service) => service.id !== serviceId);
+		// this.setState({ cart: array })
+    }
+
     render() {
 
-        const PaymentMethodsUnique = new Map();
 
-        this.state.inputPaymentMethod.forEach((method) => {
-            if (!PaymentMethodsUnique.has(method)) {
-                PaymentMethodsUnique.set(method)
-            }
+        const PaymentMethodsUnique = this.state.inputPaymentMethod.map((method) => {
             return (
-                <div>
-                    <p>{method}</p>
-                </div>
+                <li> {method} <button onClick={() => this.onClickDeleteMethod(method)}>x</button></li>
             )
         })
 
+        console.log(this.state.inputPaymentMethod)
         return (
 
             <DivCreateService>
@@ -122,9 +122,9 @@ export default class CreateServicePage extends React.Component {
                     <option value={" Boleto "}>Boleto</option>
                     <option value={" Pix "}>Pix</option>
                 </select>
-                
+
                 {PaymentMethodsUnique}
-                
+
                 <input
                     onChange={this.onChangeDueDate}
                     value={this.state.inputDueDate}

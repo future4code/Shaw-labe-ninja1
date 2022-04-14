@@ -15,7 +15,17 @@ const GlobalStyled = createGlobalStyle`
 `
 
 const HeaderDiv = styled.div`
-	border: 5px solid black;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;	
+	border: 1px solid black;
+	background-color: grey;
+	padding: 10px;
+
+	button {
+		padding: 3px 20px;
+		border-radius: 10%;
+	}
 `
 
 class App extends React.Component {
@@ -29,11 +39,8 @@ class App extends React.Component {
 		cart: []
 	}
 
-	purchaseEnd = () => {
-		this.setState({ cart: [] })
-		alert("Obrigado pela sua compra!")
-	}
 
+	// Métodos de Ciclo de Vida
 
 	componentDidUpdate() {
 		localStorage.setItem(this.state.serviceId, JSON.stringify(this.state.cart))
@@ -47,7 +54,8 @@ class App extends React.Component {
 		}
 	};
 
-
+	// Outras funções
+	
 	detailsPage = (serviceId) => {
 		this.setState({
 			serviceId: serviceId,
@@ -56,15 +64,36 @@ class App extends React.Component {
 	}
 
 	addServiceInCart = (service) => {
+		alert("Serviço adicionado no carrinho!")
 		const newService = [...this.state.cart, service]
 		this.setState({ cart: newService })
 	}
 
 	deleteServiceFromCart = (serviceId) => {
-		let array = this.state.cart
-		array.splice(serviceId, 1)
+		let array = this.state.cart.filter((service) => service.id !== serviceId);
 		this.setState({ cart: array })
 	}
+
+	purchaseEnd = () => {
+		this.setState({ cart: [] })
+		alert("Obrigado pela sua compra!")
+	}
+
+	// Funções para os filtros
+
+	onChangeMinValue = (e) => {
+		this.setState({ minValue: e.target.value })
+	}
+
+	onChangeMaxValue = (e) => {
+		this.setState({ maxValue: e.target.value })
+	}
+
+	onChangeQuery = (e) => {
+		this.setState({ query: e.target.value })
+	}
+
+	// Funções para trocar de página
 
 	onClickHomePage = () => {
 		this.setState({ screen: "Home" })
@@ -80,18 +109,6 @@ class App extends React.Component {
 
 	goToServicePage = () => {
 		this.setState({ screen: "ServicePage" })
-	}
-
-	onChangeMinValue = (e) => {
-		this.setState({ minValue: e.target.value })
-	}
-
-	onChangeMaxValue = (e) => {
-		this.setState({ maxValue: e.target.value })
-	}
-
-	onChangeQuery = (e) => {
-		this.setState({ query: e.target.value })
 	}
 
 	selectPage = () => {
@@ -131,15 +148,15 @@ class App extends React.Component {
 	}
 
 	render() {
-		// console.log(this.state.cart);
-		// comprovação do id certo sendo chamado
 		return (
 			<div>
 				<GlobalStyled />
 				<HeaderDiv>
 					<h1>LabeNinjas</h1>
-					<button onClick={this.onClickHomePage}>Home</button>
-					<button onClick={this.onClickCartPage}>Carrinho</button>
+					<div>
+						<button onClick={this.onClickHomePage}>🏠</button>
+						<button onClick={this.onClickCartPage}>🛒</button>
+					</div>
 				</HeaderDiv>
 				{this.selectPage()}
 			</div>

@@ -8,8 +8,18 @@ const DivCreateService = styled.div`
     display: flex; 
     flex-direction: column;
     align-items:center;
-    text-align: center; 
-    justify-content: center;
+    margin: 10vh;
+
+    h1 {
+        text-decoration: underline;
+        margin-bottom: 5vh;
+    }
+
+    input, select, button {
+        padding: 0.5vh 0.5vw;
+        margin: 1vh;
+        width: 200px;
+    } 
 `
 
 
@@ -33,24 +43,19 @@ export default class CreateServicePage extends React.Component {
         }
 
         axios.post(`${BASE_URL}/jobs`, body, HEADERS)
-            .then((res) => {
-                alert("Serviço cadastrado com sucesso!")
-                this.setState({
-                    inputTitle: "",
-                    inputDescription: "",
-                    inputPrice: "",
-                    inputPaymentMethod: [],
-                    inputDueDate: ""
-                })
+        .then((res) => {
+            alert("Serviço cadastrado com sucesso!")
+            this.setState({
+                inputTitle: "",
+                inputDescription: "",
+                inputPrice: "",
+                inputPaymentMethod: [],
+                inputDueDate: ""
             })
-            .catch((err) => {
-                alert("Dados inválidos")
-            })
-    }
-
-    onChangePaymentMethod = (e) => {
-        const addPaymentMethod = [...this.state.inputPaymentMethod, e.target.value]
-        this.setState({ inputPaymentMethod: addPaymentMethod })
+        })
+        .catch((err) => {
+            alert("Não foi possível registrar o serviço.")
+        })
     }
 
     onChangeTitle = (e) => {
@@ -65,11 +70,14 @@ export default class CreateServicePage extends React.Component {
         this.setState({ inputPrice: e.target.value })
     }
 
+    onChangePaymentMethod = (e) => {
+        const addPaymentMethod = [...this.state.inputPaymentMethod, e.target.value]
+        this.setState({ inputPaymentMethod: addPaymentMethod })
+    }
+
     onChangeDueDate = (e) => {
         this.setState({ inputDueDate: e.target.value })
     }
-
-
 
     render() {
 
@@ -114,9 +122,9 @@ export default class CreateServicePage extends React.Component {
                     <option value={" Boleto "}>Boleto</option>
                     <option value={" Pix "}>Pix</option>
                 </select>
-
+                
                 {PaymentMethodsUnique}
-
+                
                 <input
                     onChange={this.onChangeDueDate}
                     value={this.state.inputDueDate}

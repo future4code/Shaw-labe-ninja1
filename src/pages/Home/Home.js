@@ -1,11 +1,34 @@
 import React from 'react'
+import styled from 'styled-components'
 import axios from 'axios'
 import { BASE_URL } from '../../constants/urls'
 import { HEADERS } from '../../constants/headers'
 
+const HomeDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 10vh;
+
+    h1 {
+        padding: 5vh;
+        text-decoration: underline;
+    }
+
+    p {
+        padding: 2vh 0 0 0;
+    }
+
+    button {
+        padding: 1vh 1vw;
+        margin: 1vw;
+    }
+`
+
 export default class Home extends React.Component {
     state = {
-        cart: [],
+        cart: [], // O que esse cart faz aqui?
         idServiceClick: ""
     }
 
@@ -19,11 +42,14 @@ export default class Home extends React.Component {
 
     render() {
         return (
-            <div>
+            <HomeDiv>
                 <h1>LabeNinjas</h1>
-                <button onClick={this.props.goToCreateServicePage}>Cadastrar um serviço</button>
-                <button onClick={this.props.goToServicePage}>Contratar um serviço</button>
-            </div>
+                <p> Escolha o seu caminho Ninja </p>
+                <div>
+                    <button onClick={this.props.goToCreateServicePage}>Cadastrar um serviço</button>
+                    <button onClick={this.props.goToServicePage}>Contratar um serviço</button>
+                </div>
+            </HomeDiv>
         )
     }
 }

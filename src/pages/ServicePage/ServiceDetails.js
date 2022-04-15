@@ -43,6 +43,13 @@ const CardContainer = styled.div`
     display: flex;
     justify-content: center;
   }
+
+  @media (max-width: 551px) {
+    width: 90%;
+    div{
+      width: 70%;
+    }
+  }
 `
 
 export default class ServiceDetails extends React.Component {

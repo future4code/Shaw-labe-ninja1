@@ -6,6 +6,9 @@ import { BASE_URL } from '../../constants/urls'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { ColorizeRounded } from '@material-ui/icons'
 
 const DivCreateService = styled.div`
     display: flex; 
@@ -33,6 +36,7 @@ const ButtonMethod = styled.button`
     }
 `  
 
+toast.configure()
 export default class CreateServicePage extends React.Component {
 
     state = {
@@ -54,7 +58,7 @@ export default class CreateServicePage extends React.Component {
 
         axios.post(`${BASE_URL}/jobs`, body, HEADERS)
             .then((res) => {
-                alert("Serviço cadastrado com sucesso!")
+                toast.dark("Serviço cadastrado com sucesso!", {position: "top-center"})
                 this.setState({
                     inputTitle: "",
                     inputDescription: "",
@@ -64,7 +68,7 @@ export default class CreateServicePage extends React.Component {
                 })
             })
             .catch((err) => {
-                alert("Não foi possível registrar o serviço.")
+                toast.dark("Não foi possível registrar o serviço.", {position: "top-center"})
             })
     }
 

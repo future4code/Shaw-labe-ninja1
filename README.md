@@ -7,19 +7,19 @@ Link do site: https://labeninjas-grupo1.surge.sh/
 
 ## ⚙️ Funcionalidades
 
--✅Cadastra e publica seu serviço;
--✅Aceitamos diversas formas de pagamento;
--✅Exclui o serviço;
--✅Acesso a detalhes dos serviços ofrecidos;
--✅Adicionar serviço no carrinho;
--✅Remove item do carrinho;
--✅Finaliza compra;
--✅Navega tranquilamente entre as páginas;
+- ✅Cadastra e publica seu serviço;
+- ✅Aceitamos diversas formas de pagamento;
+- ✅Exclui o serviço;
+- ✅Acesso a detalhes dos serviços ofrecidos;
+- ✅Adicionar serviço no carrinho;
+- ✅Remove item do carrinho;
+- ✅Finaliza compra;
+- ✅Navega tranquilamente entre as páginas;
 
 ## 🎨 Layout
 
--*Mobile*
--*Desktop*
+- *Mobile*
+- *Desktop*
 
 ## 🛠 Tecnologias
 

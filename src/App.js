@@ -31,17 +31,25 @@ const HeaderDiv = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	background-color: #bfb5e3;
-	padding: 10px;
+	padding: 0.6em;
 
 	Button {
-		margin: 10px;
-		padding: 3px 10px;
-		margin-top: 55px;
+		margin: 0.6em;
+		padding: 0.2em 0.6em;
+		margin-top: 4em;
+		@media (max-width: 380px) {
+			margin: 0 2.85em;
+			padding: 0.2rem 0.5rem;
+			margin-top: 0;
+    	}
 	}
 
 	img {
-		margin-left: 40px;
-		height: 100px
+		margin-left: 2.8em;
+		height: 6em;
+		@media (max-width: 380px) {
+			display: none
+   		}
 	}
 `
 
@@ -80,9 +88,28 @@ class App extends React.Component {
 	}
 
 	addServiceInCart = (service) => {
-		alert("Serviço adicionado no carrinho!")
-		const newService = [...this.state.cart, service]
-		this.setState({ cart: newService })
+		const serviceOnCart = this.state.cart.filter((item) => {
+			if (item.id === service.id) {
+				return item;
+			} else {
+				return false
+			}
+		});
+		if (serviceOnCart.length === 0) {
+			const newCart = [service, ...this.state.cart];
+			this.setState({
+				cart: newCart,
+			});
+			alert(`Serviço ${service.title} foi adicionado ao carrinho`)
+		} else {
+			alert("Este serviço já está no carrinho")
+			const newCart = this.state.carrinho.map((item) => {
+				if (service.id === item.id) {
+					return item;
+				}
+			});
+			this.setState({ cart: newCart })
+		}
 	}
 
 	deleteServiceFromCart = (serviceId) => {

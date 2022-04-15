@@ -5,6 +5,7 @@ import { BASE_URL } from '../../constants/urls'
 import { HEADERS } from '../../constants/headers'
 import { RemoveShoppingCartSharp } from '@material-ui/icons'
 import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 const ServiceDiv = styled.div`
     display: flex;
@@ -13,11 +14,18 @@ const ServiceDiv = styled.div`
     align-items: center;
     margin: 0.5rem;
     border: 0.5px solid black;
-    width: 25vw;
+    width: 30vw;
     height: 30vh;
     border-radius: 50px; 
     box-shadow: 1px -1px 4px 1px;
     background-color: #bfb5e3;
+
+    @media (min-width: 551px) and (max-width: 830px) {
+        width: 45vw;
+    }
+    @media (max-width: 550px) {
+        width: 80vw;
+    }
 
     button {
         width: 9rem;
@@ -39,15 +47,16 @@ const ServiceDiv = styled.div`
 `
 
 const ServiceList = styled.div`
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
 `
 
 const FiltersDiv = styled.div`
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
     margin: 5vh;
 
     input, span {
@@ -59,7 +68,7 @@ export default class ServicePage extends React.Component {
 
     state = {
         serviceList: [],
-        sort: "title",
+        sort: "Sem ordenação",
     }
 
     componentDidMount() {
@@ -141,8 +150,11 @@ export default class ServicePage extends React.Component {
                     <TextField
                         id={"outlined-basic"}
                         label={"Valor mínimo"}
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start">R$</InputAdornment>,
+                        }}
                         variant={"outlined"}
-                        style={{ width: 200 }}
+                        style={{ margin:5, width: 200 }}
                         type={"number"}
                         value={this.props.minValue}
                         onChange={this.props.onChangeMinValue}
@@ -150,8 +162,11 @@ export default class ServicePage extends React.Component {
                     <TextField
                         id={"outlined-basic"}
                         label={"Valor máximo"}
+                        InputProps={{
+                            startAdornment: <InputAdornment position="start">R$</InputAdornment>,
+                        }}
                         variant={"outlined"}
-                        style={{ width: 175 }}
+                        style={{ margin:5, width: 200 }}
                         type={"number"}
                         value={this.props.maxValue}
                         onChange={this.props.onChangeMaxValue}
@@ -160,7 +175,7 @@ export default class ServicePage extends React.Component {
                         id={"outlined-basic"}
                         label={"Título ou descrição"}
                         variant={"outlined"}
-                        style={{ width: 200 }}
+                        style={{ margin:5, width: 200 }}
                         value={this.props.query}
                         onChange={this.props.onChangeQuery}
                     />
@@ -175,6 +190,7 @@ export default class ServicePage extends React.Component {
                                 label="Ordenação"
                                 variant="outlined"
                                 name="sort"
+                                style={{ margin:5 }}
                                 value={this.state.sort}
                                 onChange={this.onChangeSort}
                             >

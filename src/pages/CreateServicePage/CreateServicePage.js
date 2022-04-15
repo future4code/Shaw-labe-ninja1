@@ -5,6 +5,7 @@ import { HEADERS } from '../../constants/headers'
 import { BASE_URL } from '../../constants/urls'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 const DivCreateService = styled.div`
     display: flex; 
@@ -108,7 +109,7 @@ export default class CreateServicePage extends React.Component {
 
                 <TextField  
                     id={"outlined-basic"} 
-                    label={"Título"} 
+                    label={"Título *"} 
                     variant={"outlined"} 
                     onChange={this.onChangeTitle}
                     value={this.state.inputTitle}
@@ -116,7 +117,7 @@ export default class CreateServicePage extends React.Component {
                 />
                 <TextField 
                     id={"outlined-multiline-static"}
-                    label={"Descrição"}
+                    label={"Descrição *"}
                     multiline
                     rows={2}
                     variant={"outlined"}
@@ -126,7 +127,10 @@ export default class CreateServicePage extends React.Component {
                 />
                 <TextField
                     id={"outlined-number"}
-                    label={"R$"}
+                    label={"Preço *"}
+                    InputProps={{
+                        startAdornment: <InputAdornment position="start">R$</InputAdornment>,
+                    }}
                     type={"number"}
                     variant={"outlined"}
                     onChange={this.onChangePrice}
@@ -137,9 +141,9 @@ export default class CreateServicePage extends React.Component {
                     id="outlined-select-currency-native"
                     select
                     SelectProps={{
-                        native: true,
+                        native: false,
                     }}
-                    label="Formas de Pagamento"
+                    label="Formas de Pagamento *"
                     variant="outlined" 
                     onChange={this.onChangePaymentMethod}
                     style={{ margin: 10, width: 300 }}
@@ -155,7 +159,7 @@ export default class CreateServicePage extends React.Component {
 
                 <TextField
                     id={"date"}
-                    label={"Data de vencimento"}
+                    label={"Data de vencimento *"}
                     InputLabelProps={{
                         shrink: true,
                     }}

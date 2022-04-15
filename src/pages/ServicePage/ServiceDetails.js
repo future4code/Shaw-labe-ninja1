@@ -79,7 +79,7 @@ export default class ServiceDetails extends React.Component {
           
             <div>
               {this.state.jobDetails.title && <h1>{this.state.jobDetails.title}</h1>}
-              {this.state.jobDetails.price && (<h2>Preço:R$ {this.state.jobDetails.price}</h2>)}
+              {this.state.jobDetails.price && (<h2>Preço: R$ {this.state.jobDetails.price}</h2>)}
 
               <h2>Prazo: {dateString}</h2>
               

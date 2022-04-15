@@ -12,6 +12,8 @@ import { theme } from "../src/constants/theme"
 import Button from '@material-ui/core/Button';
 import HomeIcon from '@material-ui/icons/Home';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const GlobalStyled = createGlobalStyle`
 	* {
@@ -52,6 +54,8 @@ const HeaderDiv = styled.div`
    		}
 	}
 `
+
+toast.configure()
 
 class App extends React.Component {
 
@@ -100,9 +104,9 @@ class App extends React.Component {
 			this.setState({
 				cart: newCart,
 			});
-			alert(`Serviço ${service.title} foi adicionado ao carrinho`)
+			toast.dark(`Serviço ${service.title} foi adicionado ao carrinho`, {position: "top-center"})
 		} else {
-			alert("Este serviço já está no carrinho")
+			toast.dark("Este serviço já está no carrinho", {position: "top-center"})
 			const newCart = this.state.carrinho.map((item) => {
 				if (service.id === item.id) {
 					return item;
@@ -119,7 +123,7 @@ class App extends React.Component {
 
 	purchaseEnd = () => {
 		this.setState({ cart: [] })
-		alert("Obrigado pela sua compra!")
+		toast.dark("Obrigado pela sua compra!", {position: "top-center"})
 	}
 
 	// Funções para os filtros

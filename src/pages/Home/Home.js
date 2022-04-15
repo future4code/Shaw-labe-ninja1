@@ -33,7 +33,23 @@ const HomeDiv = styled.div`
         height: 8vh;
         font-size: 1.36rem;
     }
+
+    @media (min-width: 551px) and (max-width: 830px) {
+        Button{
+            font-size: 1rem;
+        }
+    }
+    @media (max-width: 551px){
+        Button{
+            font-size: 0.7rem;
+        }
+        h2{
+            font-size: 1.5rem;
+            text-align: center;
+        }
+    }
 `
+
 
 export default class Home extends React.Component {
     state = {

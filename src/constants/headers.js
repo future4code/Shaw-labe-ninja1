@@ -1,0 +1,1 @@
+export const HEADERS = { headers: {Authorization: "14197527-a3ef-4f5c-84b8-0de50fd8b97a"} }
